@@ -24,61 +24,43 @@ function buttonHandler() {
 }
 
 // Radio control for time display
-var $digitalValue;
-$("input[name=digital]").change(function () {
- $digitalValue = parseInt(this.value);
-});
-
-var $dateValue;
-$("input[name=datemode]").change(function () {
- $datemodeValue = parseInt(this.value);
+var $romanValue;
+$("input[name=roman]").change(function () {
+ $romanValue = parseInt(this.value);
 });
 
 function loadOptions() {
- if (localStorage.digital) {
-  $digitalValue = localStorage.digital;
-//  console.log('localStorage.digital: ' + $digitalValue);
+ if (localStorage.roman) {
+  $romanValue = localStorage.roman;
+//  console.log('localStorage.roman: ' + $romanValue);
   // setting radio' value
  } else {
-  $digitalValue = 1;
-//  console.log('localStorage.digital was undefined, now set to: ' + $digitalValue);
+  $romanValue = 1;
+//  console.log('localStorage.roman was undefined, now set to: ' + $romanValue);
  }
- $("input[name=digital][value='" + $digitalValue + "']").attr('checked', 'checked');
+ $("input[name=roman][value='" + $romanValue + "']").attr('checked', 'checked');
 
- var $numColorPicker = $('#numColorPicker');
-
- if (localStorage.numColor) {
-  $numColorPicker[0].value = localStorage.numColor;
+ var $bgColorPicker = $('#bgColorPicker');
+ if (localStorage.bgColor) {
+  $bgColorPicker[0].value = localStorage.bgColor;
  }
  
- if (localStorage.datemode) {
-  $datemodeValue = localStorage.datemode;
-//  console.log('localStorage.datemode: ' + $datemodeValue);
-  // setting radio' value
- } else {
-  $datemodeValue = 0;
-//  console.log('localStorage.datemode was undefined, now set to: ' + $datemodeValue);
- }
- $("input[name=datemode][value='" + $datemodeValue + "']").attr('checked', 'checked');
-
 } 
 
 function getAndStoreConfigData() {
- var $numColorPicker = $('#numColorPicker');
+ var $bgColorPicker = $('#bgColorPicker');
 
- console.log('digital value: ' + $digitalValue);
+ console.log('roman value: ' + $romanValue);
 
  var options = {
-  digital: $digitalValue,
-  numColor: $numColorPicker.val(),
-  datemode: $datemodeValue
+  roman:   $romanValue,
+  bgColor: $bgColorPicker.val()
  };
  
  console.log('Got options: ' + JSON.stringify(options));
 
- localStorage.digital = $digitalValue;
- localStorage.numColor = options.numColor;
- localStorage.datemode = $datemodeValue;
+ localStorage.roman = $romanValue;
+ localStorage.bgColor = options.bgColor;
 
  return options;
 }
